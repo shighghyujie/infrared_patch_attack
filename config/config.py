@@ -1,29 +1,30 @@
 import torch
-from PIL import Image
-from torchvision import transforms
-import torch.nn.functional as F
-trans = transforms.Compose([
-                transforms.ToTensor(),
-            ])
-
+import os
+import time
 
 class Config(object):
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
     display = False
-    iterations = 1
-    width, height = 120, 120 
+    iterations = 5
+    # width, height = 30, 60
+    width, height = 50, 100 
     emp_iterations = 100
-    max_pertubation_mask = 200 # 25, 50, 100, 200
+    # max_pertubation_mask = 50
+    cover_rate = 0.1
+    max_pertubation_mask = int(width*height*cover_rate*2/3)
     content = 0 # range(0, 1, 0.1)
-    res_folder = "attack_res"
-    attack_dataset_folder = "/workspace/shaped_mask_attack/yolov3/VOC2007/attack_clean"
-    # texture = Image.open("/workspace/shaped_mask_attack/texture.png")
-    texture = Image.new("RGB",(416,416),"white")
-    r, g, b = texture.split()
-    texture = Image.merge("RGB", (r, g, b))
-    texture_input = trans(texture) 
-    texture_ori = torch.stack([texture_input]).cuda()
-    texture_ori = F.interpolate(texture_ori, (height, width), mode='bilinear', align_corners=False).cuda() # 采用双线性插值将不同大小图片上/下采样到统一大小
-            
-    # attack_dataset_folder = "~/shaped_mask_attack/at_training"
-
+    res_folder = "res"
+    attack_dataset_folder = "datasets/pedestrian"
+    if not os.path.exists(res_folder):
+        os.mkdir(res_folder)
+    save_folder = os.path.join(res_folder, time.asctime( time.localtime(time.time()) ))
+    save_folder = save_folder.replace(":","")
+    if not os.path.exists(save_folder):
+        os.makedirs(save_folder)
+    imgs_dir = os.path.join(save_folder, "adv_imgs")
+    if not os.path.exists(imgs_dir):
+        os.mkdir(imgs_dir)
+    msks_dir = os.path.join(save_folder, "infrared_masks")
+    if not os.path.exists(msks_dir):
+        os.mkdir(msks_dir)
+    
