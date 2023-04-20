@@ -31,7 +31,7 @@ gaussian_kernel = torch.from_numpy(gaussian_kernel).cuda()  # tensor and cuda
 
 inputsize = [416,416]
 
-def shaped_mask_attack(H, W, bbox, model, img, device, emp_iterations, max_pertubation_mask = 100, content = 0, lambda_sparse=5, lambda_attack=20, lambda_agg=5, grad_avg=False):
+def shaped_mask_attack(H, W, bbox, model, img, device, emp_iterations, max_pertubation_mask = 100, content = 0, grad_avg=False, lambda_sparse=5, lambda_attack=20, lambda_agg=5):
     ## 图片预处理 ##
     X_ori =  torch.stack([trans(img)]).to(device) 
     X_ori = F.interpolate(X_ori, (inputsize[0], inputsize[1]), mode='bilinear', align_corners=False) # 采用双线性插值将不同大小图片上/下采样到统一大小
@@ -88,8 +88,8 @@ def shaped_mask_attack(H, W, bbox, model, img, device, emp_iterations, max_pertu
 
         # 带动量的SGD优化 #
         grad_c = mask.grad.clone()
-        grad_c = grad_c.reshape(1, 1, grad_c.shape[0], grad_c.shape[1])
         if grad_avg:
+            grad_c = grad_c.reshape(1, 1, grad_c.shape[0], grad_c.shape[1])
             grad_c = F.conv2d(grad_c, gaussian_kernel, bias=None, stride=1, padding=(1,1), groups=1)[0][0]
         grad_a = grad_c / torch.mean(torch.abs(grad_c), (0, 1), keepdim=True) + 0.85 * grad_momentum   # 1
         grad_momentum = grad_a     
