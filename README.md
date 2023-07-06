@@ -39,9 +39,15 @@ Running this command for attacks:
 $ cd infrared_patch_attack
 $ python shaped_patch_attack.py
 ```
+
 If you want to use your own data, you can pass the dataset path to the "victim_imgs" parameter.
+
 For more attack settings, you can change the values of parameters at config/config.py:
+
 width, height:  the width and height of optimized object(infrared mask). If the value is too large, it may prevent the mask from aggregating properly.
+
 emp_iterations: the steps of optimization.
+
 cover_rate:     the coverage rate of infrared patches on the target.
+
 content:        the gray value of infared patch in the thermal image.
