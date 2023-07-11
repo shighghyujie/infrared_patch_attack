@@ -28,7 +28,10 @@ $ pip install -r requirements.txt
   The Opening Database CVC-14 [CVC-14](http://adas.cvc.uab.es/webfiles/datasets/CVC-14-Visible-Fir-Day-Night/CVC-14.rar)
   
   Here, we provide the our trained weights of YOLOv3 model (based on yolov3.pt) at yolov3\weights\best.pt and some images to conduct attacks in datasets\pedestrian.
-
+  
+  Firstly, you should put the folder "weights" in "yolov3".
+  
+  The folder is at: [Download from Baidu Drive](https://pan.baidu.com/s/1cvG_FDyjMedQfixnVvHAkA) ,code:q1w2
 </details>
 
 <details open>
