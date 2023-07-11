@@ -31,7 +31,7 @@ $ pip install -r requirements.txt
   
   Firstly, you should put the folder "weights" in "yolov3".
   
-  The folder is at: [Download from Baidu Drive](https://pan.baidu.com/s/1cvG_FDyjMedQfixnVvHAkA) ,code:q1w2
+  **The folder is at: [Download from Baidu Drive](https://pan.baidu.com/s/1cvG_FDyjMedQfixnVvHAkA) ,code:q1w2**
 </details>
 
 <details open>
