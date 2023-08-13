@@ -31,7 +31,7 @@ $ pip install -r requirements.txt
   
   Firstly, you should put the folder "weights" in "yolov3".
   
-  **The weight can be downloaded form : https://pan.baidu.com/s/1cvG_FDyjMedQfixnVvHAkA, code:q1w2**
+  **The weight can be downloaded from: https://pan.baidu.com/s/1cvG_FDyjMedQfixnVvHAkA, code:q1w2 or from https://drive.google.com/file/d/1qvcQGhs20eU6DGgQqtGctVXgfJspKa2V/view?usp=sharing**
 </details>
 
 <details open>
